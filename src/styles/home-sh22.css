@@ -1,0 +1,1087 @@
+/* 首页（自 Sh2.2 移植），作用域限定在 .home-sh22 以免与 global.css 冲突 */
+
+/* ========== Hero：左侧 sh2banner 斜切 + 右侧文案（沿用旧站布局） ========== */
+.home-sh22 .hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 550px;
+  display: flex;
+  align-items: stretch;
+  background-color: rgb(var(--mdui-color-surface));
+  overflow: hidden;
+  padding: 0;
+}
+
+.home-sh22 .hero-banner-plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100%;
+  background-color: rgb(var(--mdui-color-surface-container));
+  background-image: var(--hero-banner);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+  /* 沿斜边再做一层透明度羽化，避免图片与文字区硬切 */
+  -webkit-mask-image: linear-gradient(
+    118deg,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.92) 52%,
+    rgba(0, 0, 0, 0.45) 66%,
+    rgba(0, 0, 0, 0.12) 78%,
+    transparent 88%
+  );
+  mask-image: linear-gradient(
+    118deg,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.92) 52%,
+    rgba(0, 0, 0, 0.45) 66%,
+    rgba(0, 0, 0, 0.12) 78%,
+    transparent 88%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  z-index: 0;
+}
+
+.home-sh22 .hero-banner-skew {
+  position: absolute;
+  top: 0;
+  left: 32%;
+  width: 46%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(var(--mdui-color-surface), 0) 0%,
+    rgba(var(--mdui-color-surface), 0.06) 12%,
+    rgba(var(--mdui-color-surface), 0.22) 32%,
+    rgba(var(--mdui-color-surface), 0.48) 52%,
+    rgba(var(--mdui-color-surface), 0.78) 74%,
+    rgb(var(--mdui-color-surface)) 100%
+  );
+  transform: skewX(-12deg);
+  transform-origin: top left;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 轻量顶部高光，不遮挡 banner */
+.home-sh22 .hero-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at top center, rgba(91, 107, 191, 0.14) 0%, transparent 65%);
+  opacity: 1;
+}
+
+html.mdui-theme-dark .home-sh22 .hero-ambient,
+[data-mdui-theme='dark'] .home-sh22 .hero-ambient {
+  background: radial-gradient(ellipse at top center, rgba(91, 107, 191, 0.08) 0%, transparent 68%);
+}
+
+.home-sh22 .hero-banner-inner {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+  padding: 80px 48px;
+  position: relative;
+  z-index: 3;
+  min-height: 550px;
+  box-sizing: border-box;
+}
+
+.home-sh22 .hero-content {
+  width: 45%;
+  margin-left: auto;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 20px;
+  max-width: 560px;
+}
+
+.home-sh22 .hero-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0;
+  border-radius: 20px;
+}
+
+.home-sh22 .hero-section .hero-title {
+  font-size: 2.625rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+  color: rgb(var(--mdui-color-on-surface));
+}
+
+.home-sh22 .hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.85;
+  max-width: 100%;
+  color: rgb(var(--mdui-color-on-surface-variant));
+}
+
+.home-sh22 .hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+  margin: 4px 0 0;
+}
+
+.home-sh22 .hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+@media (max-width: 1200px) {
+  .home-sh22 .hero-section .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .home-sh22 .hero-banner-inner {
+    padding: 60px 32px;
+  }
+
+  .home-sh22 .hero-content {
+    width: 50%;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-sh22 .hero-section {
+    min-height: auto;
+  }
+
+  .home-sh22 .hero-banner-plane {
+    width: 100%;
+    height: 42%;
+    min-height: 200px;
+    clip-path: none;
+    opacity: 0.35;
+    background-image: var(--hero-banner);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  }
+
+  .home-sh22 .hero-banner-skew {
+    display: none;
+  }
+
+  .home-sh22 .hero-banner-inner {
+    flex-direction: column;
+    padding: 48px 24px 56px;
+    min-height: auto;
+  }
+
+  .home-sh22 .hero-content {
+    width: 100%;
+    margin-left: 0;
+    padding: 24px 0 0;
+    align-items: center;
+    text-align: center;
+    max-width: 520px;
+  }
+
+  .home-sh22 .hero-chips {
+    justify-content: center;
+  }
+
+  .home-sh22 .hero-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-sh22 .hero-section .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .home-sh22 .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .home-sh22 .hero-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .home-sh22 .hero-banner-inner {
+    padding: 40px 16px 48px;
+  }
+
+  .home-sh22 .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 8px;
+  }
+
+  .home-sh22 .hero-buttons mdui-button {
+    width: 100%;
+  }
+
+  .home-sh22 .hero-chips mdui-chip {
+    font-size: 0.875rem;
+  }
+}
+
+.home-sh22 .feature-section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.home-sh22 .feature-section--odd {
+  background-color: rgb(var(--mdui-color-surface));
+}
+
+.home-sh22 .feature-section--even {
+  background-color: rgb(var(--mdui-color-surface-container));
+}
+
+.home-sh22 .feature-section-content {
+  position: relative;
+  padding-left: 24px;
+  text-align: left;
+}
+
+.home-sh22 .feature-section-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--section-color, rgb(var(--mdui-color-primary)));
+  border-radius: 2px;
+}
+
+.home-sh22 .feature-section .feature-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.home-sh22 .feature-section .feature-title .feature-number {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--section-color, rgb(var(--mdui-color-primary)));
+  opacity: 0.8;
+}
+
+.home-sh22 .feature-section .feature-title h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.home-sh22 .feature-section .feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+  align-items: stretch;
+}
+
+.home-sh22 .feature-card-host {
+  height: 100%;
+  min-height: 0;
+}
+
+@media (max-width: 800px) {
+  .home-sh22 .feature-section .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-sh22 .feature-card-host mdui-card.feature-card {
+  height: 100%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 12px;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  will-change: transform;
+}
+
+.home-sh22 .feature-card-host mdui-card.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.18),
+    0 4px 12px rgba(91, 107, 191, 0.12);
+}
+
+html.mdui-theme-dark .home-sh22 .feature-card-host mdui-card.feature-card:hover,
+[data-mdui-theme='dark'] .home-sh22 .feature-card-host mdui-card.feature-card:hover {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.42),
+    0 6px 20px rgba(120, 135, 220, 0.15);
+}
+
+.home-sh22 .feature-card-host mdui-card.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 8px;
+}
+
+.home-sh22 .feature-card-host mdui-card.feature-card p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.home-sh22 .cta-section,
+.about-page .cta-section {
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 与 Sh2.2 一致：仅自上而下线性渐变，无额外伪元素 */
+.home-sh22 .cta-section::before,
+.about-page .cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(91, 107, 191, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+html.mdui-theme-dark .home-sh22 .cta-section::before,
+[data-mdui-theme='dark'] .home-sh22 .cta-section::before,
+html.mdui-theme-dark .about-page .cta-section::before,
+[data-mdui-theme='dark'] .about-page .cta-section::before {
+  background: linear-gradient(180deg, rgba(91, 107, 191, 0.04) 0%, transparent 100%);
+}
+
+.home-sh22 .cta-content,
+.about-page .cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-sh22 .cta-title,
+.about-page .cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.home-sh22 .cta-subtitle,
+.about-page .cta-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.home-sh22 .cta-buttons,
+.about-page .cta-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .home-sh22 .cta-title,
+  .about-page .cta-title {
+    font-size: 1.75rem;
+  }
+
+  .home-sh22 .cta-subtitle,
+  .about-page .cta-subtitle {
+    font-size: 1rem;
+  }
+
+  .home-sh22 .cta-buttons,
+  .about-page .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .home-sh22 .cta-buttons mdui-button,
+  .about-page .cta-buttons mdui-button {
+    width: 100%;
+  }
+}
+
+.home-sh22 .github-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* 滚动进入（与 Layout.initAnimations 配合） */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.delay-1 {
+  transition-delay: 0.1s;
+}
+.animate-on-scroll.delay-2 {
+  transition-delay: 0.2s;
+}
+.animate-on-scroll.delay-3 {
+  transition-delay: 0.3s;
+}
+.animate-on-scroll.delay-4 {
+  transition-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .home-sh22 .hero-animate {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@keyframes home-sh22-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-sh22 .hero-animate {
+  animation: home-sh22-hero-fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.home-sh22 .hero-animate.delay-1 {
+  animation-delay: 0.08s;
+}
+.home-sh22 .hero-animate.delay-2 {
+  animation-delay: 0.16s;
+}
+.home-sh22 .hero-animate.delay-3 {
+  animation-delay: 0.24s;
+}
+.home-sh22 .hero-animate.delay-4 {
+  animation-delay: 0.33s;
+}
+
+/* 下载页 Hero（与 Sh2.2 一致，独立于 .home-sh22） */
+.download-hero {
+  position: relative;
+  text-align: center;
+  padding: 100px 0 60px;
+  overflow: hidden;
+}
+
+.download-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center top, rgba(var(--mdui-color-primary), 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+[data-mdui-theme="dark"] .download-hero-bg {
+  background: radial-gradient(ellipse at center top, rgba(var(--mdui-color-primary), 0.06) 0%, transparent 60%);
+}
+
+.download-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.download-hero-icon {
+  font-size: 80px;
+  color: rgb(var(--mdui-color-primary));
+  filter: drop-shadow(0 8px 24px rgba(var(--mdui-color-primary), 0.2));
+  margin-bottom: 8px;
+}
+
+.download-title {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgb(var(--mdui-color-on-surface));
+}
+
+.download-subtitle {
+  margin: 0;
+  font-size: 1.25rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+}
+
+@media (max-width: 1200px) and (min-width: 601px) {
+  .download-hero {
+    padding: 80px 0 48px;
+  }
+
+  .download-hero-icon {
+    font-size: 72px;
+  }
+
+  .download-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .download-hero {
+    padding: 60px 0 40px;
+  }
+
+  .download-hero-icon {
+    font-size: 64px;
+  }
+
+  .download-title {
+    font-size: 2rem;
+  }
+
+  .download-subtitle {
+    font-size: 1rem;
+    padding: 0 16px;
+  }
+}
+
+/* ========== 关于页（自 Sh2.2 移植，含赞助商区块） ========== */
+.about-page {
+  --max-width: 1200px;
+  --content-padding: 42px;
+  padding-bottom: 80px;
+}
+
+.about-hero {
+  position: relative;
+  text-align: center;
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+
+.about-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center top, rgba(var(--mdui-color-primary), 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+[data-mdui-theme='dark'] .about-hero-bg {
+  background: radial-gradient(ellipse at center top, rgba(var(--mdui-color-primary), 0.06) 0%, transparent 60%);
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-hero-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 8px 24px rgba(var(--mdui-color-primary), 0.2));
+}
+
+.about-hero-title {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgb(var(--mdui-color-on-surface));
+}
+
+.about-hero-subtitle {
+  margin: 0;
+  font-size: 1.25rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+  max-width: 400px;
+}
+
+.about-intro {
+  max-width: var(--max-width);
+  margin: 0 auto 60px;
+  padding: 0 var(--content-padding);
+}
+
+.about-intro-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.about-intro-content {
+  padding: 40px;
+}
+
+.about-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.about-section-title.centered {
+  justify-content: center;
+  text-align: center;
+  max-width: var(--max-width);
+  margin: 0 auto 32px;
+  padding: 0 var(--content-padding);
+}
+
+.about-section-title mdui-icon {
+  font-size: 1.5rem;
+  color: rgb(var(--mdui-color-primary));
+}
+
+.about-intro-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgb(var(--mdui-color-on-surface-variant));
+  margin: 0 0 24px;
+}
+
+.about-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.tech-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(var(--mdui-color-on-surface-variant));
+}
+
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-team {
+  max-width: var(--max-width);
+  margin: 0 auto 60px;
+  padding: 0 var(--content-padding);
+}
+
+.contributors-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.contributor-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contributor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.contributor-avatar {
+  --shape-corner: var(--mdui-shape-corner-full);
+  width: 80px;
+  height: 80px;
+  border: 3px solid rgb(var(--mdui-color-primary));
+}
+
+.contributor-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.contributor-name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.contributor-role {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+}
+
+.contributor-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.contributor-link {
+  margin-top: 4px;
+}
+
+.join-card .join-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(var(--mdui-color-secondary), 0.15) 0%, rgba(var(--mdui-color-tertiary), 0.1) 100%);
+  border-radius: 50%;
+}
+
+.join-card .join-icon mdui-icon {
+  font-size: 40px;
+  color: rgb(var(--mdui-color-secondary));
+}
+
+.about-opensource {
+  max-width: var(--max-width);
+  margin: 0 auto 60px;
+  padding: 0 var(--content-padding);
+  text-align: center;
+}
+
+.opensource-card {
+  padding: 48px;
+  text-align: center;
+}
+
+.opensource-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(var(--mdui-color-primary), 0.12) 0%, rgba(var(--mdui-color-primary), 0.06) 100%);
+  border-radius: 50%;
+}
+
+.opensource-icon mdui-icon {
+  font-size: 40px;
+  color: rgb(var(--mdui-color-primary));
+}
+
+.opensource-title {
+  margin: 0 0 12px;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.opensource-desc {
+  font-size: 1rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+  margin: 0 auto 28px;
+  max-width: 500px;
+}
+
+.opensource-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.opensource-meta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.about-thanks {
+  max-width: var(--max-width);
+  margin: 0 auto 60px;
+  padding: 0 var(--content-padding);
+}
+
+.thanks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.thanks-card {
+  padding: 28px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thanks-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.thanks-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(var(--mdui-color-tertiary), 0.15) 0%, rgba(var(--mdui-color-secondary), 0.1) 100%);
+  border-radius: 16px;
+}
+
+.thanks-icon mdui-icon {
+  font-size: 28px;
+  color: rgb(var(--mdui-color-tertiary));
+}
+
+.thanks-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.thanks-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+  line-height: 1.5;
+}
+
+.about-sponsors {
+  max-width: var(--max-width);
+  margin: 0 auto 60px;
+  padding: 0 var(--content-padding);
+}
+
+.about-sponsors .about-section-title.centered {
+  margin-bottom: 12px;
+}
+
+.about-sponsors-lead {
+  margin: 0 auto 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: rgb(var(--mdui-color-on-surface-variant));
+  max-width: 560px;
+}
+
+.about-sponsors-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.about-sponsors-card {
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.about-sponsors-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.about-sponsors-text {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.about-sponsors-name {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.about-sponsors-desc {
+  margin: 0;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant));
+}
+
+@media (max-width: 1200px) and (min-width: 601px) {
+  .about-hero {
+    padding: 80px 0 60px;
+  }
+
+  .about-hero-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .about-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .thanks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .about-intro,
+  .about-team,
+  .about-opensource,
+  .about-thanks,
+  .about-sponsors {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-page {
+    --content-padding: 12px;
+  }
+
+  .about-hero {
+    padding: 60px 0 40px;
+  }
+
+  .about-hero-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .about-hero-title {
+    font-size: 2rem;
+  }
+
+  .about-hero-subtitle {
+    font-size: 1rem;
+    padding: 0 16px;
+  }
+
+  .about-intro {
+    margin: 0 12px 40px;
+    padding: 0;
+  }
+
+  .about-intro-content {
+    padding: 24px;
+  }
+
+  .about-section-title {
+    font-size: 1.25rem;
+  }
+
+  .about-section-title.centered {
+    padding: 0 16px;
+  }
+
+  .about-team,
+  .about-opensource,
+  .about-thanks,
+  .about-sponsors {
+    margin: 0 12px 40px;
+    padding: 0;
+  }
+
+  .contributors-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contributor-card {
+    padding: 24px;
+  }
+
+  .contributor-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .opensource-card {
+    padding: 32px 24px;
+  }
+
+  .opensource-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .opensource-icon mdui-icon {
+    font-size: 32px;
+  }
+
+  .opensource-title {
+    font-size: 1.5rem;
+  }
+
+  .thanks-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .thanks-card {
+    padding: 20px;
+  }
+
+  .about-sponsors-card .flex.items-center.gap-4 {
+    flex-wrap: wrap;
+  }
+
+  .about-sponsors-card mdui-button {
+    width: 100%;
+  }
+}
