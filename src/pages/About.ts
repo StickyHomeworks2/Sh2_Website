@@ -3,6 +3,9 @@ import { DOCS_URL } from '../constants';
 import { publicAsset } from '../utils/publicAsset';
 
 const logoUrl = publicAsset('AppLogo.png');
+const avatarHelloWrc = publicAsset('avatars/hello-wrc.png');
+const avatarJizilin = publicAsset('avatars/jizilin6732.png');
+const avatarClassIsBand = publicAsset('avatars/classisband.png');
 
 export function initAboutPage(navigate: (path: string) => void): void {
   const downloadBtn = document.getElementById('about-download-btn');
@@ -71,7 +74,7 @@ export function renderAboutPage(): string {
         </h2>
         <div class="contributors-container">
           <mdui-card variant="outlined" class="contributor-card main-contributor">
-            <mdui-avatar src="https://github.com/HelloWRC.png" class="contributor-avatar"></mdui-avatar>
+            <mdui-avatar src="${avatarHelloWrc}" class="contributor-avatar"></mdui-avatar>
             <div class="contributor-info">
               <h3 class="contributor-name">HelloWRC</h3>
               <p class="contributor-role">Sh项目创建者</p>
@@ -93,7 +96,7 @@ export function renderAboutPage(): string {
           </mdui-card>
 
           <mdui-card variant="outlined" class="contributor-card main-contributor">
-            <mdui-avatar src="https://github.com/jizilin6732.png" class="contributor-avatar"></mdui-avatar>
+            <mdui-avatar src="${avatarJizilin}" class="contributor-avatar"></mdui-avatar>
             <div class="contributor-info">
               <h3 class="contributor-name">Jizilin</h3>
               <p class="contributor-role">Sh2项目创建者 & 开发者</p>
@@ -115,7 +118,7 @@ export function renderAboutPage(): string {
           </mdui-card>
 
           <mdui-card variant="outlined" class="contributor-card main-contributor">
-            <mdui-avatar src="https://github.com/belugaQAQ.png" class="contributor-avatar"></mdui-avatar>
+            <mdui-avatar src="${avatarClassIsBand}" class="contributor-avatar"></mdui-avatar>
             <div class="contributor-info">
               <h3 class="contributor-name">ClassIsBand</h3>
               <p class="contributor-role">主要开发者</p>
