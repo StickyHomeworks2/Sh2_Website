@@ -1,4 +1,4 @@
-# StickyHomeworks2 官网（Sh2.1）
+# StickyHomeworks2 官网
 
 [StickyHomeworks2](https://github.com/StickyHomeworks2/StickyHomeworks2) 的静态展示站点：首页、下载、关于。使用 **Vite + TypeScript**，界面基于 **MDUI v2**（Material Design 3 Web Components）。
 
